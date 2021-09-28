@@ -20,6 +20,17 @@ abstract class Nasabah {
         this.idNasabah = new SimpleIntegerProperty(idNasabah);
         this.rekening = rekening;
     }
+    //c
+    public Nasabah(String nama, String alamat,Integer idNasabah,Rekening rekening) {
+        this.nama = new SimpleStringProperty(nama);
+        this.alamat = new SimpleStringProperty(alamat);
+        this.idNasabah = new SimpleIntegerProperty(idNasabah);
+        this.rekening.add(rekening);
+        
+    }
+    
+    
+    
     public String getNama() {
         return nama.get();
     }

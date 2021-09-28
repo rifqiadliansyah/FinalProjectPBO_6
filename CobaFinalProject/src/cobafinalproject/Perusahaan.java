@@ -12,6 +12,11 @@ import javafx.beans.property.StringProperty;
         super(nama, alamat,idNasabah, rekening);
         this.nib = new SimpleStringProperty(nib); 
     }
+    
+    public Perusahaan(String nib, String nama, String alamat,Integer idNasabah, Rekening rekening) {
+        super(nama, alamat,idNasabah, rekening);
+        this.nib = new SimpleStringProperty(nib); 
+    }
 
     public String getNib() {
         return nib.get();
