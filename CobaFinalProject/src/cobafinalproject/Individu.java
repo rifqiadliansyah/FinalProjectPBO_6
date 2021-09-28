@@ -14,7 +14,13 @@ class Individu extends Nasabah {
         this.nik = new SimpleLongProperty(nik);
         this.npwp = new SimpleLongProperty(npwp);
     }
-
+    
+    public Individu(Long nik, Long npwp, String nama, String alamat,Integer idNasabah, Rekening rekening) {
+        super(nama, alamat,idNasabah,rekening);
+        this.nik = new SimpleLongProperty(nik);
+        this.npwp = new SimpleLongProperty(npwp);
+    }
+    
     public Long getNik() {
         return nik.get();
     }
