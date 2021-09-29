@@ -15,7 +15,7 @@ import javafx.collections.ObservableList;
 
 
 public class NasabahDataModel {
-    private final Connection conn;
+    public final Connection conn;
 
     public NasabahDataModel(String driver) throws SQLException {
     this.conn= DBHelper.getConnection(driver);
@@ -133,7 +133,7 @@ public class NasabahDataModel {
        
        //method supaya idnasabah tidak sama
        public int nextNasabahID () throws SQLException{
-       String sql = "SELECT MAX (idNasabah) FROM nasabah";
+       String sql = "SELECT MAX(idNasabah) FROM nasabah";
        ResultSet rs = conn.createStatement().executeQuery(sql);
        while(rs.next()){
               return rs.getInt(1)==0? 1000001 :rs.getInt(1)+1;
@@ -143,7 +143,7 @@ public class NasabahDataModel {
        
        //setting no rekening agar sma mulainya kek ID nasabah
        public int nextRekeningNo (int idNasabah) throws SQLException{
-       String sql = "SELECT MAX (no_rekening) FROM rekening WHERE idNasabah="+idNasabah;
+       String sql = "SELECT MAX(no_rekening) FROM rekening WHERE idNasabah="+idNasabah;
        ResultSet rs = conn.createStatement().executeQuery(sql);
        while(rs.next()){
               return rs.getInt(1)+1;
