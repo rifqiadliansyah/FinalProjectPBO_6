@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
- class Perusahaan extends Nasabah{
+ public class Perusahaan extends Nasabah{
     private StringProperty nib;
     
     public Perusahaan(String nib, String nama, String alamat,Integer idNasabah, ArrayList<Rekening> rekening) {

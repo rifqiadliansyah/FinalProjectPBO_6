@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 
 public class NasabahFormController implements Initializable {
@@ -49,31 +51,31 @@ public class NasabahFormController implements Initializable {
     private Button btnClear;
 
     @FXML
-    private TableView<?> tblKoperasi;
+    private TableView<Individu> tblKoperasi;
+    
+    @FXML
+    private TableColumn<Individu,Integer> colIdNasabah;
 
     @FXML
-    private TableColumn<?, ?> colIdNasabah;
+    private TableColumn<Individu, String> colNama;
 
     @FXML
-    private TableColumn<?, ?> colNama;
+    private TableColumn<Individu, String> colAlamat;
 
     @FXML
-    private TableColumn<?, ?> colAlamat;
+    private TableColumn<Individu, Long> colNik;
 
     @FXML
-    private TableColumn<?, ?> colNik;
+    private TableColumn<Individu, Long> colNpwp;
 
     @FXML
-    private TableColumn<?, ?> colNpwp;
+    private TableView<Rekening> tblRekening;
 
     @FXML
-    private TableView<?> tblRekening;
+    private TableColumn<Rekening,Integer> colNoRekening;
 
     @FXML
-    private TableColumn<?, ?> colNoRekening;
-
-    @FXML
-    private TableColumn<?, ?> colSaldo;
+    private TableColumn<Rekening,Double> colSaldo;
 
     @FXML
     private TextField tfNewIdNasabah;
@@ -86,27 +88,62 @@ public class NasabahFormController implements Initializable {
 
     @FXML
     private Button btnAddAccount;
+    
+    @FXML
+    private Label lblSaveStat;
 
     @FXML
-    
-//    private Label lblSaveStatus;
     private Label lbDBStatus;
+    @FXML
     private NasabahDataModel ndm;
+    
     @FXML
     void handleAddAccountButton(ActionEvent event) {
-
+     try {
+        
+         Rekening rek = new Rekening(Integer.parseInt(tfNewIdNasabah.getText()),Double.parseDouble(tfNewSaldo.getText()));
+         ndm.addRekening(Integer.parseInt(tfNewIdNasabah.getText()),rek);
+         viewDataRekening(Integer.parseInt(tfNewIdNasabah.getText()));
+         btnReload.fire();
+         tfNewSaldo.setText("");
+     } catch (SQLException ex) {
+         Logger.getLogger(NasabahFormController.class.getName()).log(Level.SEVERE, null, ex);
+     }
     }
-
+    
+ 
+    
     @FXML
     void handleClearButton(ActionEvent event) {
-
+     try {
+         tfIdNasabah.setText(""+ndm.nextNasabahID()); 
+         tfNorekening.setText(tfIdNasabah.getText()+"01");
+         tfNama.setText("");
+         tfAlamat.setText("");
+         tfNik.setText("");
+         tfNpwp.setText("");
+         tfSaldo.setText("");
+     } catch (SQLException ex) {
+         Logger.getLogger(NasabahFormController.class.getName()).log(Level.SEVERE, null, ex);
+     }
     }
+    
+  
 
     @FXML
     void handleReloadButton(ActionEvent event) {
-
+     ObservableList<Individu> data = ndm.getIndividu();
+     colNik.setCellValueFactory(new PropertyValueFactory<>("nik"));
+     colNpwp.setCellValueFactory(new PropertyValueFactory<>("npwp"));
+     colNama.setCellValueFactory(new PropertyValueFactory<>("nama"));
+     colAlamat.setCellValueFactory(new PropertyValueFactory<>("alamat"));
+     colIdNasabah.setCellValueFactory(new PropertyValueFactory<>("idNasabah"));
+     tblKoperasi.setItems(null);
+     tblKoperasi.setItems(data);
+     btnAddAccount.setDisable(true);
     }
-
+    
+   
     @FXML
     void handleSaveButton(ActionEvent event) {
         Individu individu = new Individu(Long.parseLong(tfNik.getText())
@@ -119,15 +156,18 @@ public class NasabahFormController implements Initializable {
      try {
          ndm.addNasabah(individu);
            
-//         lblSaveStatus.setText("Account berhasil dibuat");
+         lblSaveStat.setText("Account berhasil dibuat");
+         btnReload.fire();
+         btnClear.fire();
      } catch (SQLException ex) {
            
-//         lblSaveStatus.setText("Account gagal dibuat");
+         lblSaveStat.setText("Account gagal dibuat");
          Logger.getLogger(NasabahFormController.class.getName()).log(Level.SEVERE, null, ex);
      }
         
     }
-
+    
+ 
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -136,12 +176,32 @@ public class NasabahFormController implements Initializable {
          ndm = new NasabahDataModel("MYSQL");
          //checking database terkoneksi atau tidak
          lbDBStatus.setText(ndm.conn==null?"Not Connected":"Connected");
-         tfIdNasabah.setText(""+ndm.nextNasabahID());
-         tfNorekening.setText(tfIdNasabah.getText()+"01");
-         
+         btnClear.fire();
+         btnReload.fire();
      } catch (SQLException ex) {
          Logger.getLogger(NasabahFormController.class.getName()).log(Level.SEVERE, null, ex);
      }
+     
+     tblKoperasi.getSelectionModel().selectedIndexProperty().addListener(listener->{
+     if(tblKoperasi.getSelectionModel().getSelectedItem()!=null){
+     Individu individu = tblKoperasi.getSelectionModel().getSelectedItem();
+     viewDataRekening(individu.getIdNasabah());
+     btnAddAccount.setDisable(false);
+     tfNewIdNasabah.setText(""+individu.getIdNasabah());
+         try {
+             tfNewNoRek.setText(""+ndm.nextRekeningNo(individu.getIdNasabah()));
+         } catch (SQLException ex) {
+             Logger.getLogger(NasabahFormController.class.getName()).log(Level.SEVERE, null, ex);
+         }
+     }
+     });
     }    
     
+    public void viewDataRekening(int idNasabah){
+     ObservableList<Rekening> data = ndm.getRekening(idNasabah);
+     colNoRekening.setCellValueFactory(new PropertyValueFactory<>("noRekening"));
+     colSaldo.setCellValueFactory(new PropertyValueFactory<>("saldo"));
+     tblRekening.setItems(null);
+     tblRekening.setItems(data);
+    }
 }

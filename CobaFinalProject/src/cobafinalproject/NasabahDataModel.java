@@ -71,11 +71,12 @@ public class NasabahDataModel {
     public ObservableList<Individu> getIndividu(){
         ObservableList<Individu> data = FXCollections.observableArrayList();
         //Tandaiin kalo salah
-        String sql = "SELECT `idNasabah`,`nama`,`alamat`,`nik`,`npwp` FROM `nasabah` NATURAL JOIN `individu` ORDER BY nama";
+        String sql = "SELECT `nik`,`npwp`,`nama`,`alamat`,`idNasabah` FROM `nasabah` NATURAL JOIN `individu` ORDER BY nama";
+        
         try {
             ResultSet rs = conn.createStatement().executeQuery(sql);
             while(rs.next()){
-             String sqlRekening = "SELECT no_rekening,saldo FROM rekening WHERE idNasabah= "+rs.getInt(1);
+             String sqlRekening = "SELECT no_rekening, saldo FROM rekening WHERE idNasabah= "+rs.getInt(1);
              ResultSet rsRekening = conn.createStatement().executeQuery(sqlRekening);
              ArrayList<Rekening> dataRekening = new ArrayList<>();
              while(rsRekening.next()){
@@ -86,6 +87,7 @@ public class NasabahDataModel {
            
 
         } catch (SQLException ex) {
+            
             Logger.getLogger(NasabahDataModel.class.getName()).log(Level.SEVERE, null, ex);
         }
         return data;
@@ -94,7 +96,7 @@ public class NasabahDataModel {
        public ObservableList<Perusahaan> getPerusahaan(){
         ObservableList<Perusahaan> data = FXCollections.observableArrayList();
         //Tandaiin kalo salah
-        String sql = "SELECT `idNasabah`,`nama`,`alamat`,`nib` FROM `nasabah` NATURAL JOIN `perusahaan` ORDER BY nama";
+        String sql = "SELECT `nib`,`nama`,`alamat`,`idNasabah` FROM `nasabah` NATURAL JOIN `perusahaan` ORDER BY nama";
         try {
             ResultSet rs = conn.createStatement().executeQuery(sql);
             while(rs.next()){
@@ -150,4 +152,14 @@ public class NasabahDataModel {
             }
        return 0; 
        }
+       
+     public void addRekening(int idNasabah, Rekening rekening) throws SQLException{
+     String insertNasabah = "INSERT INTO rekening (idNasabah,no_rekening,saldo)"+" VALUES (?,?,?)";
+     
+     PreparedStatement stmtNasabah = conn.prepareStatement(insertNasabah);
+     stmtNasabah.setInt(1,idNasabah);
+     stmtNasabah.setInt(2,rekening.getNoRekening());
+     stmtNasabah.setDouble(3,rekening.getSaldo());
+     stmtNasabah.execute();
+    }
 }

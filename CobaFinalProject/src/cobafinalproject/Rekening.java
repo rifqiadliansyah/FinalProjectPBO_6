@@ -7,7 +7,7 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 
-class Rekening {
+public class Rekening {
     private IntegerProperty noRekening;
     private DoubleProperty saldo;
     
