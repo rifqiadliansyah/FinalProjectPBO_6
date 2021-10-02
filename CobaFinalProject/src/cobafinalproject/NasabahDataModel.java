@@ -23,8 +23,8 @@ public class NasabahDataModel {
     
     public void addNasabah(Individu i) throws SQLException{
      String insertNasabah = "INSERT INTO nasabah (idNasabah,nama,alamat)"+" VALUES (?,?,?)";
-     String insertIndividu = "INSERT INTO INDIVIDU (idNasabah,nik,npwp)"+" VALUES(?,?,?)";
-     String insertRekening = "INSERT INTO REKENING (no_rekening,saldo,idNasabah)"+" VALUES(?,?,?)"; 
+     String insertIndividu = "INSERT INTO individu (idNasabah,nik,npwp)"+" VALUES(?,?,?)";
+     String insertRekening = "INSERT INTO rekening (no_rekening,saldo,idNasabah)"+" VALUES(?,?,?)"; 
      
      PreparedStatement stmtNasabah = conn.prepareStatement(insertNasabah);
      stmtNasabah.setInt(1,i.getIdNasabah());
@@ -48,7 +48,7 @@ public class NasabahDataModel {
     public void addNasabah(Perusahaan i) throws SQLException{
      String insertNasabah = "INSERT INTO nasabah (idNasabah,nama,alamat)"+" VALUES (?,?,?)";
      String insertPerusahaan = "INSERT INTO perusahaan (idNasabah,nib)"+" VALUES(?,?)";
-     String insertRekening = "INSERT INTO REKENING (no_rekening,saldo,idNasabah)"+" VALUES(?,?,?)"; 
+     String insertRekening = "INSERT INTO rekening (no_rekening,saldo,idNasabah)"+" VALUES(?,?,?)"; 
      
      PreparedStatement stmtNasabah = conn.prepareStatement(insertNasabah);
      stmtNasabah.setInt(1,i.getIdNasabah());
@@ -155,7 +155,6 @@ public class NasabahDataModel {
        
      public void addRekening(int idNasabah, Rekening rekening) throws SQLException{
      String insertNasabah = "INSERT INTO rekening (idNasabah,no_rekening,saldo)"+" VALUES (?,?,?)";
-     
      PreparedStatement stmtNasabah = conn.prepareStatement(insertNasabah);
      stmtNasabah.setInt(1,idNasabah);
      stmtNasabah.setInt(2,rekening.getNoRekening());
