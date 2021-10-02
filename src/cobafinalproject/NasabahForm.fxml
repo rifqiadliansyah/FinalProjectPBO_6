@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cobafinalproject.NasabahFormController">
+   <children>
+      <MenuBar layoutY="6.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Transaksi">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Tambah Saldo" />
+                  <MenuItem mnemonicParsing="false" text="Tarik Tunai" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <AnchorPane layoutX="1.0" layoutY="38.0" prefHeight="683.0" prefWidth="1280.0">
+         <children>
+            <TabPane prefHeight="683.0" prefWidth="1280.0" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab text="Individu">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <HBox prefHeight="645.0" prefWidth="1280.0" style="-fx-background-color: ff758f;">
+                                 <children>
+                                    <AnchorPane prefHeight="647.0" prefWidth="360.0" style="-fx-background-color: f72585;">
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </HBox.margin>
+                                       <children>
+                                          <Label layoutX="14.0" layoutY="8.0" prefHeight="62.0" prefWidth="307.0" text="Sistem Koperasi Simpan Pinjam" textFill="WHITE">
+                                             <font>
+                                                <Font name="System Bold" size="19.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="tfIdNasabah" disable="true" layoutX="12.0" layoutY="78.0" prefHeight="32.0" prefWidth="304.0" promptText="ID Nasabah" />
+                                          <TextField fx:id="tfNama" layoutX="12.0" layoutY="122.0" prefHeight="32.0" prefWidth="304.0" promptText="Nama" />
+                                          <TextField fx:id="tfAlamat" layoutX="12.0" layoutY="169.0" prefHeight="32.0" prefWidth="304.0" promptText="Alamat" />
+                                          <TextField fx:id="tfNik" layoutX="12.0" layoutY="215.0" prefHeight="32.0" prefWidth="304.0" promptText="NIK" />
+                                          <TextField fx:id="tfNpwp" layoutX="12.0" layoutY="263.0" prefHeight="32.0" prefWidth="304.0" promptText="NPWP" />
+                                          <TextField fx:id="tfNorekening" disable="true" layoutX="11.0" layoutY="311.0" prefHeight="32.0" prefWidth="304.0" promptText="No Rekening" />
+                                          <TextField fx:id="tfSaldo" layoutX="10.0" layoutY="352.0" prefHeight="32.0" prefWidth="304.0" promptText="Saldo" />
+                                          <Button fx:id="btnSave" layoutX="11.0" layoutY="450.0" mnemonicParsing="false" onAction="#handleSaveButton" prefHeight="31.0" prefWidth="303.0" style="-fx-background-color: bdb2ff;" text="Simpan" textFill="WHITE">
+                                             <font>
+                                                <Font name="System Bold" size="19.0" />
+                                             </font></Button>
+                                          <Button fx:id="btnReload" layoutX="13.0" layoutY="505.0" mnemonicParsing="false" onAction="#handleReloadButton" prefHeight="31.0" prefWidth="303.0" style="-fx-background-color: b100e8;" text="Reload Data" textFill="WHITE">
+                                             <font>
+                                                <Font name="System Bold" size="19.0" />
+                                             </font>
+                                          </Button>
+                                          <Button fx:id="btnClear" layoutX="13.0" layoutY="557.0" mnemonicParsing="false" onAction="#handleClearButton" prefHeight="31.0" prefWidth="303.0" style="-fx-background-color: #000080;" text="Bersihkan Form" textFill="WHITE">
+                                             <font>
+                                                <Font name="System Bold" size="19.0" />
+                                             </font>
+                                          </Button>
+                                          <Label fx:id="lblSaveStat" layoutX="14.0" layoutY="396.0" prefHeight="45.0" prefWidth="288.0" textFill="#09ff00">
+                                             <font>
+                                                <Font name="System Bold" size="16.0" />
+                                             </font>
+                                          </Label>
+                                       </children></AnchorPane>
+                                    <AnchorPane prefHeight="645.0" prefWidth="922.0">
+                                       <children>
+                                          <VBox prefHeight="647.0" prefWidth="932.0">
+                                             <children>
+                                                <AnchorPane prefHeight="366.0" prefWidth="932.0" style="-fx-background-color: ffb3c1;">
+                                                   <VBox.margin>
+                                                      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                   </VBox.margin>
+                                                   <children>
+                                                      <TableView fx:id="tblKoperasi" prefHeight="345.0" prefWidth="911.0">
+                                                        <columns>
+                                                          <TableColumn fx:id="colIdNasabah" prefWidth="102.0" text="ID Nasabah" />
+                                                          <TableColumn fx:id="colNama" prefWidth="228.0" text="Nama" />
+                                                            <TableColumn fx:id="colAlamat" prefWidth="288.0" text="Alamat" />
+                                                            <TableColumn fx:id="colNik" prefWidth="149.0" text="NIK" />
+                                                            <TableColumn fx:id="colNpwp" prefWidth="143.0" text="NPWP" />
+                                                        </columns>
+                                                      </TableView>
+                                                   </children>
+                                                </AnchorPane>
+                                                <HBox prefHeight="282.0" prefWidth="932.0" style="-fx-background-color: ffffff;">
+                                                   <VBox.margin>
+                                                      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                   </VBox.margin>
+                                                   <children>
+                                                      <AnchorPane prefHeight="262.0" prefWidth="478.0" style="-fx-background-color: f3c4fb;">
+                                                         <children>
+                                                            <TableView fx:id="tblRekening" prefHeight="265.0" prefWidth="476.0">
+                                                              <columns>
+                                                                <TableColumn fx:id="colNoRekening" prefWidth="171.0" text="No Rekening" />
+                                                                <TableColumn fx:id="colSaldo" prefWidth="304.0" text="Saldo" />
+                                                              </columns>
+                                                            </TableView>
+                                                         </children>
+                                                      </AnchorPane>
+                                                      <AnchorPane prefHeight="265.0" prefWidth="440.0">
+                                                         <children>
+                                                            <TextField fx:id="tfNewIdNasabah" disable="true" layoutX="14.0" layoutY="14.0" prefHeight="32.0" prefWidth="304.0" promptText="ID Nasabah" />
+                                                            <TextField fx:id="tfNewNoRek" disable="true" layoutX="14.0" layoutY="64.0" prefHeight="32.0" prefWidth="304.0" promptText="No Rekening Baru" />
+                                                            <TextField fx:id="tfNewSaldo" layoutX="14.0" layoutY="115.0" prefHeight="32.0" prefWidth="304.0" promptText=" Saldo Baru" />
+                                                            <Button fx:id="btnAddAccount" layoutX="15.0" layoutY="177.0" mnemonicParsing="false" onAction="#handleAddAccountButton" prefHeight="31.0" prefWidth="303.0" style="-fx-background-color: bdb2ff;" text="Tambah Akun" textFill="WHITE">
+                                                               <font>
+                                                                  <Font name="System Bold" size="19.0" />
+                                                               </font>
+                                                            </Button>
+                                                         </children>
+                                                      </AnchorPane>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </HBox>
+                           </children></AnchorPane>
+                  </content>
+                </Tab>
+                <Tab text="Perusahaan">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <HBox prefHeight="648.0" prefWidth="1302.0" style="-fx-background-color: ff758f;">
+                                 <children>
+                                    <AnchorPane prefHeight="648.0" prefWidth="349.0" style="-fx-background-color: f72585;">
+                                       <children>
+                                          <Label layoutX="34.0" layoutY="14.0" text="Sistem Koperasi Simpan Pinjam" textFill="WHITE">
+                                             <font>
+                                                <Font name="System Bold" size="19.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="tfIdNasabahP" disable="true" layoutX="23.0" layoutY="65.0" prefHeight="32.0" prefWidth="304.0" promptText="ID Nasabah" />
+                                          <TextField fx:id="tfNamaP" layoutX="23.0" layoutY="113.0" prefHeight="32.0" prefWidth="304.0" promptText="Nama" />
+                                          <TextField fx:id="tfAlamatP" layoutX="23.0" layoutY="161.0" prefHeight="32.0" prefWidth="304.0" promptText="Alamat" />
+                                          <TextField fx:id="tfNorekeningP" disable="true" layoutX="24.0" layoutY="292.0" prefHeight="32.0" prefWidth="304.0" promptText="No Rekening" />
+                                          <TextField fx:id="tfSaldoP" layoutX="24.0" layoutY="338.0" prefHeight="32.0" prefWidth="304.0" promptText="Saldo" />
+                                          <Button fx:id="btnSaveP" layoutX="25.0" layoutY="462.0" mnemonicParsing="false" onAction="#handleSaveButtonP" prefHeight="31.0" prefWidth="303.0" style="-fx-background-color: bdb2ff;" text="Simpan" textFill="WHITE">
+                                             <font>
+                                                <Font name="System Bold" size="19.0" />
+                                             </font>
+                                          </Button>
+                                          <Button fx:id="btnReloadP" layoutX="25.0" layoutY="517.0" mnemonicParsing="false" onAction="#handleReloadButtonP" prefHeight="31.0" prefWidth="303.0" style="-fx-background-color: b100e8;" text="Reload Data" textFill="WHITE">
+                                             <font>
+                                                <Font name="System Bold" size="19.0" />
+                                             </font>
+                                          </Button>
+                                          <Button fx:id="btnClearP" layoutX="25.0" layoutY="572.0" mnemonicParsing="false" onAction="#handleClearButtonP" prefHeight="31.0" prefWidth="303.0" style="-fx-background-color: #000080;" text="Bersihkan Form" textFill="WHITE">
+                                             <font>
+                                                <Font name="System Bold" size="19.0" />
+                                             </font>
+                                          </Button>
+                                          <Label fx:id="lblSaveStatP" layoutX="23.0" layoutY="401.0" prefHeight="45.0" prefWidth="288.0" textFill="#09ff00">
+                                             <font>
+                                                <Font name="System Bold" size="16.0" />
+                                             </font>
+                                          </Label>
+                                       </children></AnchorPane>
+                                    <AnchorPane prefHeight="648.0" prefWidth="932.0">
+                                       <children>
+                                          <VBox prefHeight="649.0" prefWidth="932.0">
+                                             <children>
+                                                <AnchorPane prefHeight="354.0" prefWidth="932.0">
+                                                   <children>
+                                                      <TableView fx:id="tblKoperasiP" prefHeight="362.0" prefWidth="931.0">
+                                                        <columns>
+                                                          <TableColumn fx:id="colIdNasabahP" prefWidth="158.0" text="Id Nasabah" />
+                                                          <TableColumn fx:id="colNamaP" prefWidth="293.0" text="Nama" />
+                                                            <TableColumn fx:id="colAlamatP" prefWidth="294.0" text="Alamat" />
+                                                            <TableColumn fx:id="colNib" prefWidth="185.0" text="NIB" />
+                                                        </columns>
+                                                      </TableView>
+                                                   </children>
+                                                </AnchorPane>
+                                                <HBox prefHeight="285.0" prefWidth="932.0">
+                                                   <children>
+                                                      <AnchorPane prefHeight="285.0" prefWidth="935.0">
+                                                         <children>
+                                                            <TableView fx:id="tblRekeningP" prefHeight="288.0" prefWidth="457.0">
+                                                              <columns>
+                                                                <TableColumn fx:id="colNoRekeningP" prefWidth="222.0" text="No Rekening" />
+                                                                <TableColumn fx:id="colSaldoP" prefWidth="250.0" text="Saldo" />
+                                                              </columns>
+                                                            </TableView>
+                                                            <AnchorPane layoutX="475.0" prefHeight="285.0" prefWidth="461.0" style="-fx-background-color: #FFFAFA;">
+                                                               <children>
+                                                                  <TextField fx:id="tfNewIdNasabahP" disable="true" layoutX="91.0" layoutY="13.0" prefHeight="32.0" prefWidth="304.0" promptText="ID Nasabah" />
+                                                                  <TextField fx:id="tfNewNoRekP" disable="true" layoutX="91.0" layoutY="54.0" prefHeight="32.0" prefWidth="304.0" promptText="No Rekening Baru" />
+                                                                  <TextField fx:id="tfNewSaldoP" layoutX="92.0" layoutY="97.0" prefHeight="32.0" prefWidth="304.0" promptText=" Saldo Baru" />
+                                                                  <Button fx:id="btnAddAccountP" layoutX="92.0" layoutY="155.0" mnemonicParsing="false" onAction="#handleAddAccountButtonP" prefHeight="31.0" prefWidth="303.0" style="-fx-background-color: bdb2ff;" text="Tambah Akun" textFill="WHITE">
+                                                                     <font>
+                                                                        <Font name="System Bold" size="19.0" />
+                                                                     </font>
+                                                                  </Button>
+                                                               </children></AnchorPane>
+                                                         </children>
+                                                      </AnchorPane>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </HBox>
+                              <TextField fx:id="tfNib" layoutX="22.0" layoutY="208.0" prefHeight="32.0" prefWidth="304.0" promptText="NIB" />
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+              </tabs>
+            </TabPane>
+         </children>
+      </AnchorPane>
+      <Label layoutX="1057.0" layoutY="12.0" text="DB Status :" />
+      <Label fx:id="lbDBStatus" layoutX="1135.0" layoutY="12.0" />
+   </children>
+</AnchorPane>
