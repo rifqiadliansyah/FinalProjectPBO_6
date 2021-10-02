@@ -2,6 +2,7 @@
 package cobafinalproject;
 
 import java.net.URL;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -153,6 +154,18 @@ public class NasabahFormController implements Initializable {
     @FXML
     private Button btnAddAccountP;
     
+    @FXML
+    private Button TrkSaldo;
+
+    @FXML
+    private Button TmbSaldo;
+    
+    @FXML
+    private Button TrkSaldoP;
+
+    @FXML
+    private Button TmbSaldoP;
+
 
     @FXML
     private Label lblSaveStat;
@@ -162,6 +175,8 @@ public class NasabahFormController implements Initializable {
     private Label lbDBStatus;
     @FXML
     private NasabahDataModel ndm;
+    
+    private Rekening bank;
     
     //check
     @FXML
@@ -290,6 +305,42 @@ public class NasabahFormController implements Initializable {
      }
     }
     
+        @FXML
+    void handleTambahSaldo(ActionEvent event) throws SQLException {
+        double saldobaru = bank.getSaldo()+ Double.parseDouble(tfNewSaldo.getText());
+        String Update = "UPDATE `rekening` SET `saldo` ="+ saldobaru + " WHERE `no_rekening` = "+bank.getNoRekening();
+        PreparedStatement n = ndm.conn.prepareStatement(Update);
+        n.execute();
+        viewDataRekening(Integer.parseInt(tfNewIdNasabah.getText()));
+    }
+
+    @FXML
+    void handleTambahSaldoP(ActionEvent event) throws SQLException {
+        double saldobaru = bank.getSaldo()+ Double.parseDouble(tfNewSaldoP.getText());
+        String Update = "UPDATE `rekening` SET `saldo` ="+ saldobaru + " WHERE `no_rekening` = "+bank.getNoRekening();
+        PreparedStatement n = ndm.conn.prepareStatement(Update);
+        n.execute();
+        viewDataRekeningP(Integer.parseInt(tfNewIdNasabahP.getText()));
+    }
+
+    @FXML
+    void handleTarikSaldoP(ActionEvent event) throws SQLException {
+        double saldobaru = bank.getSaldo()- Double.parseDouble(tfNewSaldoP.getText());
+        String Update = "UPDATE `rekening` SET `saldo` ="+ saldobaru + " WHERE `no_rekening` = "+bank.getNoRekening();
+        PreparedStatement n = ndm.conn.prepareStatement(Update);
+        n.execute();
+        viewDataRekeningP(Integer.parseInt(tfNewIdNasabahP.getText()));
+    }
+
+    @FXML
+    void handleTariksaldo(ActionEvent event) throws SQLException {
+        double saldobaru = bank.getSaldo()- Double.parseDouble(tfNewSaldo.getText());
+        String Update = "UPDATE `rekening` SET `saldo` ="+ saldobaru + " WHERE `no_rekening` = "+bank.getNoRekening();
+        PreparedStatement n = ndm.conn.prepareStatement(Update);
+        n.execute();
+        viewDataRekening(Integer.parseInt(tfNewIdNasabah.getText()));
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
      try {
@@ -318,6 +369,24 @@ public class NasabahFormController implements Initializable {
          }
      }
      });
+     //
+    tblRekening.getSelectionModel().selectedIndexProperty().addListener(listener->{
+            if (tblRekening.getSelectionModel().getSelectedItem() != null){
+                
+                bank  = tblRekening.getSelectionModel().getSelectedItem();
+
+            }
+        
+    } );
+    
+     tblRekeningP.getSelectionModel().selectedIndexProperty().addListener(listener->{
+            if (tblRekeningP.getSelectionModel().getSelectedItem() != null){
+                
+                bank  = tblRekeningP.getSelectionModel().getSelectedItem();
+
+            }
+        
+    } );
      
      tblKoperasiP.getSelectionModel().selectedIndexProperty().addListener(listener->{
             if (tblKoperasiP.getSelectionModel().getSelectedItem() != null){
@@ -332,7 +401,9 @@ public class NasabahFormController implements Initializable {
                 }
             }
         });
-    }    
+    } 
+    
+    
     ///check
     public void viewDataRekening(int idNasabah){
      ObservableList<Rekening> data = ndm.getRekening(idNasabah);
@@ -346,7 +417,7 @@ public class NasabahFormController implements Initializable {
      ObservableList<Rekening> data = ndm.getRekening(idNasabah);
      colNoRekeningP.setCellValueFactory(new PropertyValueFactory<>("noRekening"));
      colSaldoP.setCellValueFactory(new PropertyValueFactory<>("saldo"));
-     tblRekening.setItems(null);
-     tblRekening.setItems(data);
+     tblRekeningP.setItems(null);
+     tblRekeningP.setItems(data);
     }
 }

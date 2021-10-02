@@ -122,14 +122,16 @@
                                                       </AnchorPane>
                                                       <AnchorPane prefHeight="265.0" prefWidth="440.0">
                                                          <children>
-                                                            <TextField fx:id="tfNewIdNasabah" disable="true" layoutX="14.0" layoutY="14.0" prefHeight="32.0" prefWidth="304.0" promptText="ID Nasabah" />
-                                                            <TextField fx:id="tfNewNoRek" disable="true" layoutX="14.0" layoutY="64.0" prefHeight="32.0" prefWidth="304.0" promptText="No Rekening Baru" />
-                                                            <TextField fx:id="tfNewSaldo" layoutX="14.0" layoutY="115.0" prefHeight="32.0" prefWidth="304.0" promptText=" Saldo Baru" />
-                                                            <Button fx:id="btnAddAccount" layoutX="15.0" layoutY="177.0" mnemonicParsing="false" onAction="#handleAddAccountButton" prefHeight="31.0" prefWidth="303.0" style="-fx-background-color: bdb2ff;" text="Tambah Akun" textFill="WHITE">
+                                                            <TextField fx:id="tfNewIdNasabah" disable="true" layoutX="61.0" layoutY="14.0" prefHeight="32.0" prefWidth="304.0" promptText="ID Nasabah" />
+                                                            <TextField fx:id="tfNewNoRek" disable="true" layoutX="61.0" layoutY="64.0" prefHeight="32.0" prefWidth="304.0" promptText="No Rekening Baru" />
+                                                            <TextField fx:id="tfNewSaldo" layoutX="61.0" layoutY="115.0" prefHeight="32.0" prefWidth="304.0" promptText=" Saldo Baru" />
+                                                            <Button fx:id="btnAddAccount" layoutX="67.0" layoutY="156.0" mnemonicParsing="false" onAction="#handleAddAccountButton" prefHeight="31.0" prefWidth="303.0" style="-fx-background-color: bdb2ff;" text="Tambah Akun" textFill="WHITE">
                                                                <font>
                                                                   <Font name="System Bold" size="19.0" />
                                                                </font>
                                                             </Button>
+                                                            <Button fx:id="TrkSaldo" layoutX="54.0" layoutY="212.0" mnemonicParsing="false" onAction="#handleTariksaldo" prefHeight="19.0" prefWidth="120.0" text="Tarik" />
+                                                            <Button fx:id="TmbSaldo" layoutX="292.0" layoutY="212.0" mnemonicParsing="false" onAction="#handleTambahSaldo" prefHeight="26.0" prefWidth="91.0" text="Tambah" />
                                                          </children>
                                                       </AnchorPane>
                                                    </children>
@@ -218,6 +220,8 @@
                                                                         <Font name="System Bold" size="19.0" />
                                                                      </font>
                                                                   </Button>
+                                                                  <Button fx:id="TrkSaldoP" layoutX="100.0" layoutY="227.0" mnemonicParsing="false" onAction="#handleTarikSaldoP" prefHeight="33.0" prefWidth="107.0" text="Tarik" />
+                                                                  <Button fx:id="TmbSaldoP" layoutX="338.0" layoutY="226.0" mnemonicParsing="false" onAction="#handleTambahSaldoP" prefHeight="34.0" prefWidth="96.0" text="Tambah" />
                                                                </children></AnchorPane>
                                                          </children>
                                                       </AnchorPane>
