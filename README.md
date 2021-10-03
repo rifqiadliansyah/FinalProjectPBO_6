@@ -14,3 +14,7 @@ Program Sistem Koperasi ini dapat melakukan pembuatan akun baik individu maupun 
 ![ScreenShot form perusahaan](https://user-images.githubusercontent.com/71004111/135710416-23d244fd-c2a5-4baa-90e0-74b325a50034.jpg)
 <br />
 
+ER Diagram
+<br />
+<br />
+![Kel6PBO](https://user-images.githubusercontent.com/83407800/135744131-f7b7f16b-81f1-4451-a67f-872839fd2a7d.png)
