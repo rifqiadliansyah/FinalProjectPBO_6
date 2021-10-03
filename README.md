@@ -12,3 +12,25 @@ Program Sistem Koperasi ini dapat melakukan pembuatan akun baik individu maupun 
 <br />
 <br />
 ![ScreenShot form perusahaan](https://user-images.githubusercontent.com/71004111/135710416-23d244fd-c2a5-4baa-90e0-74b325a50034.jpg)
+<br />
+<br />
+erDiagram
+      NASABAH ||..|| INDIVIDU: is
+          NASABAH ||--|| PERUSAHAAN: is
+          NASABAH ||--|{ REKENING: "has"
+          NASABAH {
+            int id
+            string nama
+            string alamat
+          }
+          INDIVIDU{
+            long nik
+            long npwp
+          }
+          PERUSAHAAN{
+            string nib
+          }
+          REKENING{ 
+            int noRekening
+            double saldo
+          }
